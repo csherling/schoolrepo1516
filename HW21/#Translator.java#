@@ -1,0 +1,14 @@
+public class Translator {
+
+    private static final String VOWELS = "aeiou";
+    public static void main( String[] args) {
+	String letter = "a";
+	for( String w : args ) {
+	    System.out.println( w + "contains " + letter + ": " + hasA(w,letter) );
+	}
+    }
+}
+
+// N: Final is a JAva keyword to denote a CONSTANT.
+// (convention is to use CAPS to name constant vars)
+// Q: Why is it a good idea to have the VOWELS constant?
