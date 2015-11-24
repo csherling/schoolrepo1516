@@ -48,7 +48,11 @@ public class Tile {
     }
  
   
-    public static void main(String [] args) {
+    public void set_isFaceUp(boolean _isFaceUp) {
+		this._isFaceUp = _isFaceUp;
+	}
+
+	public static void main(String [] args) {
 				Tile t1 = new Tile("cow");
 				Tile t2 = new Tile("cow");
 				System.out.println("t1\tt2");
