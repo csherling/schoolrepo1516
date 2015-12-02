@@ -1,5 +1,10 @@
+/*  Christopher Sherling
+    APCS1 pd5
+    HW39 -- Array of Steel
+    2015-12-01 */
+
 /*****************************
- * SKELETON for
+ * Code for
  * class SuperArray --  A wrapper class for an array. 
  * Maintains functionality:
  *  access value at index
@@ -38,7 +43,7 @@ public class SuperArray {
 	    if(i < this._data.length - 1){
 		info += this._data[i] + ", ";
 	    }
-	    else{
+	    else{//case for last item in array
 		info += this._data[i];
 	    }
 	}
