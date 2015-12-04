@@ -1,7 +1,8 @@
-/*  Team Christo Meith  - Mei Huang, Christopher Sherling
+/*  Team Red Squad  - Aleksandar Shipetich, Christopher Sherling
     APCS1 pd5
-    HW37 -- Rational Equality
-    2015-11-24 */
+    HW41 -- In America, the Driver Sits on the Left
+    2015-12-4
+    */
 
 public class  Rational implements Comparable{
 	 
