@@ -1,46 +1,46 @@
 /*
-Christopher Sherling
+Team Dexamil - Christopher Sherling, Dorothy Ng
 APCS1 PD5
-HW43 This or That
+HW44 --This or That or Fourteen Other Things
 2015-12-07
  */
 
-public class Binary {
+public class Hexadecimal {
 
     private int _decNum;
-    private String _binNum;
-
+    private String _hexNum;
+    private final static String HEXDIGITS = "0123456789ABCDEF";
 
     /*=====================================
       default constructor
       pre:  n/a
-      post: initializes _decNum to 0, _binNum to "0"
+      post: initializes _decNum to 0, _hexNum to "0"
       =====================================*/
-    public Binary() { 
+    public Hexadecimal() { 
 	_decNum = 0;
-	_binNum = "0";
+	_hexNum = "0";
     }
 
 
     /*=====================================
       overloaded constructor
       pre:  n >= 0
-      post: sets _decNum to n, _binNum to equiv string of bits
+      post: sets _decNum to n, _hexNum to equiv string of bits
       =====================================*/
-    public Binary( int n ) {
-	_binNum = decToBinR(n);
+    public Hexadecimal( int n ) {
+	_hexNum = dectoHexR(n);
 	_decNum = n;
     }
 
 
     /*=====================================
       overloaded constructor
-      pre:  s is String representing non-negative binary number
-      post: sets _binNum to input, _decNum to decimal equiv
+      pre:  s is String representing non-negative hexadecimal number
+      post: sets _hexNum to input, _decNum to decimal equiv
       =====================================*/
-    public Binary( String s ) {
-	_decNum = binToDecR(s);
-	_binNum = s;
+    public Hexadecimal( String s ) {
+	_decNum = hextoDecR(s);
+	_hexNum = s;
     }
 
 
@@ -50,44 +50,44 @@ public class Binary {
       post: returns String of 1's and 0's representing value of this Object
       =====================================*/
     public String toString() { 
-	return _binNum + " " + _decNum;
+	return _hexNum;
     }
 
 
     /*=====================================
-      String decToBin(int) -- converts base-10 input to binary
+      String dectoHex(int) -- converts base-10 input to hexadecimal
       pre:  n >= 0
       post: returns String of bits
-      eg  decToBin(0) -> "0"
-      decToBin(1) -> "1"
-      decToBin(2) -> "10"
-      decToBin(3) -> "11"
-      decToBin(14) -> "1110"
+      eg  dectoHex(0) -> "0"
+      dectoHex(1) -> "1"
+      dectoHex(2) -> "2"
+      dectoHex(3) -> "3"
+      dectoHex(14) -> "E"
       =====================================*/
-    public static String decToBin( int n ) {
+    public static String dectoHex( int n ) {
 	String te = "";
 	while(n != 0){
-	    te = (n % 2) + te;
-	    n /= 2;
+	    te = HEXDIGITS.substring((n % 16), (n % 16) + 1) + te;
+	    n /= 16;
 	}
 	return te;
     }
 
 
     /*=====================================
-      String decToBinR(int) -- converts base-10 input to binary, recursively
+      String dectoHexR(int) -- converts base-10 input to hexadecimal, recursively
       pre:  n >= 0
       post: returns String of bits
-      eg  decToBinR(0) -> "0"
-      decToBinR(1) -> "1"
-      decToBinR(2) -> "10"
-      decToBinR(3) -> "11"
-      decToBinR(14) -> "1110"
+      eg  dectoHexR(0) -> "0"
+      dectoHexR(1) -> "1"
+      dectoHexR(2) -> "2"
+      dectoHexR(3) -> "3"
+      dectoHexR(14) -> "E"
       =====================================*/
-    public static String decToBinR( int n ) { 
+    public static String dectoHexR( int n ) { 
 	String te = "";
 	if(n != 0){
-	    te = decToBinR(n / 2) + (n % 2);
+	    te = dectoHexR(n / 16) + HEXDIGITS.substring((n % 16), (n % 16) + 1);
 	}
 	else{
 	    return "";
@@ -97,21 +97,21 @@ public class Binary {
 
 
     /*=====================================
-      String binToDec(String) -- converts base-10 input to binary
-      pre:  s represents non-negative binary number
+      String hextoDec(String) -- converts base-10 input to hexadecimal
+      pre:  s represents non-negative hexadecimal number
       post: returns decimal equivalent as int
       eg  
-      binToDec("0") -> 0
-      binToDec("1") -> 1
-      binToDec("10") -> 2
-      binToDec("11") -> 3
-      binToDec("1110") -> 14
+      hextoDec("0") -> 0
+      hextoDec("1") -> 1
+      hextoDec("2") -> 2
+      hextoDec("3") -> 3
+      hextoDec("E") -> 14
       =====================================*/
-    public static int binToDec( String s ) {
+    public static int hextoDec( String s ) {
         int te = 0;
 	int ctr = 0;
 	for(int i = s.length(); i > 0; i--){
-	    te += Integer.parseInt(s.substring(i - 1, i)) * Math.pow(2, ctr);
+	    te += HEXDIGITS.indexOf(s.substring(i - 1, i) + "") * Math.pow(16, ctr);
 	    ctr++;
 	}
 	return te;
@@ -119,23 +119,23 @@ public class Binary {
 
 
     /*=====================================
-      String binToDecR(String) -- converts base-10 input to binary, recursively
-      pre:  s represents non-negative binary number
+      String hextoDecR(String) -- converts base-10 input to hexadecimal, recursively
+      pre:  s represents non-negative hexadecimal number
       post: returns decimal equivalent as int
       eg  
-      binToDecR("0") -> 0
-      binToDecR("1") -> 1
-      binToDecR("10") -> 2
-      binToDecR("11") -> 3
-      binToDecR("1110") -> 14
+      hextoDecR("0") -> 0
+      hextoDecR("1") -> 1
+      hextoDecR("2") -> 2
+      hextoDecR("3") -> 3
+      hextoDecR("E") -> 14
       =====================================*/
-    public static int binToDecR( String s ) { 
+    public static int hextoDecR( String s ) { 
 	int te = 0;
 	if(s.length() > 1){
-	    te = binToDecR(s.substring(1, s.length())) + Integer.parseInt(s.substring(0, 1)) * (int)Math.pow(2, s.length() - 1);
+	    te = hextoDecR(s.substring(1, s.length())) + HEXDIGITS.indexOf(s.substring(0, 1)) * (int)Math.pow(16, s.length() - 1);
 	}
 	else{
-	    return ((int)Math.pow(2, 0) * (Integer.parseInt(s)));
+	    return ((int)Math.pow(16, 0) * HEXDIGITS.indexOf(s));
 	}//could return parseInt(s), but I chose this because it's a power of 2
 	return te;
     }
@@ -143,29 +143,29 @@ public class Binary {
 
     /*=============================================
       boolean equals(Object) -- tells whether 2 Objs are equivalent
-      pre:  other is an instance of class Binary
+      pre:  other is an instance of class Hexadecimal
       post: Returns true if this and other are aliases (pointers to same 
-      Object), or if this and other represent equal binary values
+      Object), or if this and other represent equal hexadecimal values
       =============================================*/
 
     public boolean equals( Object other ) { 
-	return ((this==other) || (this.tiString().equals(other.toString())));
+	return ((this==other) || (this.toString().equals(other.toString())));
     }
     /*
     */
 
     /*=============================================
-      int compareTo(Object) -- tells which of two Binary objects is greater
-      pre:  other is instance of class Binary
+      int compareTo(Object) -- tells which of two Hexadecimal objects is greater
+      pre:  other is instance of class Hexadecimal
       post: Returns 0 if this Object is equal to the input Object,
       negative integer if this<input, positive integer otherwise
       =============================================*/
 
     public int compareTo( Object other ) {
-	if(this._decNum == ((Binary)other)._decNum){
+	if(this._decNum == ((Hexadecimal)other)._decNum){
 	    return 0;
 	}
-	else if(this._decNum > ((Binary)other)._decNum){
+	else if(this._decNum > ((Hexadecimal)other)._decNum){
 	    return 1;
 	}
 	else{
@@ -178,24 +178,25 @@ public class Binary {
     //main method for testing
     public static void main( String[] args ) {
 
-	System.out.println(binToDec("0101")); //5
-	System.out.println(binToDec("1010")); //10
-	System.out.println(binToDecR("0101")); //5 
-	System.out.println(binToDecR("1010")); //10
-	System.out.println(decToBin(5)); //101
-	System.out.println(decToBin(10)); //1010
-	System.out.println(decToBinR(5)); //101
-	System.out.println(decToBinR(10)); //1010
-
+	System.out.println(hextoDec("5")); //5
+	System.out.println(hextoDec("80520")); //525600
+	System.out.println(hextoDecR("5")); //5 
+	System.out.println(hextoDecR("80520")); //525600
+	System.out.println(dectoHex(5)); //5
+	System.out.println(dectoHex(525600)); //80520
+	System.out.println(dectoHexR(5)); //5
+	System.out.println(dectoHexR(525600)); //80520
+	System.out.println(hextoDec("F000")); //61440
+	System.out.println(dectoHex(61440)); //F000
 
 	System.out.println();
 	System.out.println( "Testing ..." );
 
-	Binary b1 = new Binary(5);
-	Binary b2 = new Binary("101");
-	Binary b3 = b1;
-	Binary b4 = new Binary(7);
-	Binary b5 = new Binary(73);
+	Hexadecimal b1 = new Hexadecimal(5);
+	Hexadecimal b2 = new Hexadecimal("5");
+	Hexadecimal b3 = b1;
+	Hexadecimal b4 = new Hexadecimal(7);
+	Hexadecimal b5 = new Hexadecimal(15);
 
 	System.out.println( b1 );
 	System.out.println( b2 );
