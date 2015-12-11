@@ -1,3 +1,10 @@
+/*
+Christopher Sherling
+APCS1 PD5
+HW46 Asecending
+2015-12-10
+ */
+
 /*============================================
   class OrderedArrayList
   Wrapper class for ArrayList.
