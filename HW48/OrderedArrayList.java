@@ -115,10 +115,17 @@ public class OrderedArrayList {
 	init = System.currentTimeMillis();
 	// testing linear search
 	for( int i = 0; i < 10000; i++ ) {
-	    int valToAdd = (int)( 500 * Math.random() );
+	    int valToAdd = (int)( 5000000 * Math.random() );
 	    //System.out.println( valToAdd );
 	    Franz.addBinary( valToAdd );
 	}
+	//1 million, 50k possibilities, 454353 millis
+	//100k, 500k, 2433 millis
+	//100k, 5mil, 2569 millis
+	//10k, 5k, 170
+	//10k, 50k, 160
+	//10k, 500k, 159
+	//10k, 5mil, 166
 
 	outit = System.currentTimeMillis();
 
