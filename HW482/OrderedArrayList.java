@@ -1,9 +1,9 @@
 /*
-Christopher Sherling
-APCS PD5
-HW47 Halving the Halves
-2015-12-12
- */
+  Christopher Sherling, Advay Sriram, Vincent Alykin TEAM ALEKSWAG
+  APCS1 PD5
+  HW47 Halving the Halves
+  2015-12-12
+*/
 
 /*============================================
   class OrderedArrayList
@@ -93,7 +93,7 @@ public class OrderedArrayList {
 	}
 	else{ //if data size is >1
 	    if((newVal.compareTo(_data.get(med)) >= 0) &&
-		(newVal.compareTo(_data.get(med+1)) <= 0))
+	       (newVal.compareTo(_data.get(med+1)) <= 0))
 		_data.add(med+1, newVal);
 	    else if(newVal.compareTo(_data.get(med)) > 0)
 		addBinaryR(newVal, hi, med + 1);
@@ -102,8 +102,11 @@ public class OrderedArrayList {
 	}
     }
     
+    
 
-    public int findLin(Comparable target) {
+    // determine whether element present in data structure using linear search
+    // return index of occurrence or -1 if not found
+    public int findLin( Comparable target ) { 
 	for(int i = 0; i < _data.size(); i++){
 	    if(_data.get(i).compareTo(target) == 0){
 		return i;
@@ -111,161 +114,69 @@ public class OrderedArrayList {
 	}
 	return -1;
     }
+    public int binSearch (Comparable target, int hi, int lo){
+    	if (hi == lo){
+	    return -1;
+    	}
+    	else if(_data.size() == 0){
+	    return -1;
+    	}
+    	int i = (hi + lo)/2;
+    	if(_data.get(i).compareTo(target) == 0){
+	    return i;
+    	}
+    	else if (_data.get(i).compareTo (target) < 0){
+	    return binSearch (target, i, lo);
+    	}
+    	else {
+	    return binSearch (target, hi, i + 1);
+    	}
+    }
 
-    // main method solely for testing purposes
-    public static void main( String[] args ) {
-
-	int s = 100000;
-	int p = 500;
-    
-	OrderedArrayList Franz = new OrderedArrayList();
-
-	System.out.println("\nValues to add via addLinear() calls:");
+    public long testLin(Comparable target){
 	long init;
 	long outit;
 	init = System.currentTimeMillis();
-        // testing linear search
+	this.findLin(target);
+	outit = System.currentTimeMillis();
+	return outit - init;
+    }
+
+    // main method solely for testing purposes
+    
+    public long testbin (Comparable target, int hi, int lo){
+    	long in, out;
+    	
+    	in = System.currentTimeMillis ();
+    	this.binSearch (target, hi, lo);
+    	out = System.currentTimeMillis ();
+    	return out-in;
+    	
+    }
+    public static void main( String[] args ) {
+	int s = 1000000;
+	int p = 50000;
+	OrderedArrayList Franz = new OrderedArrayList();
+
+	System.out.println("\nValues to add via addLinear() calls:");
+	// testing linear search
 	for( int i = 0; i < s; i++ ) {
 	    int valToAdd = (int)( p * Math.random() );
 	    //System.out.println( valToAdd );
 	    Franz.addBinary( valToAdd );
 	}
-	outit = System.currentTimeMillis();
+	
 	Franz.addBinary(p/2);
-	/*
-	OrderedArrayList Ferd = new OrderedArrayList();
 
-	long init1;
-	long outit1;
-	init1 = System.currentTimeMillis();
-	// testing linear search
-	for( int j = 0; j < s; j++ ) {
-	    int valToAdd = (int)( p * Math.random() );
-	    //System.out.println( valToAdd );
-	    Ferd.addBinary( valToAdd );
-	}
-	outit1 = System.currentTimeMillis();
-
-	OrderedArrayList F2 = new OrderedArrayList();
-
-	long init2;
-	long outit2;
-	init2 = System.currentTimeMillis();
-	// testing linear search
-	for( int k = 0; k < s; k++ ) {
-	    int valToAdd = (int)( p * Math.random() );
-	    //System.out.println( valToAdd );
-	    F2.addBinary( valToAdd );
-	}
-	outit2 = System.currentTimeMillis();
-
-	OrderedArrayList F3 = new OrderedArrayList();
-
-	long init3;
-	long outit3;
-	init3 = System.currentTimeMillis();
-	// testing linear search
-	for( int l = 0; l < s; l++ ) {
-	    int valToAdd = (int)( p * Math.random() );
-	    //System.out.println( valToAdd );
-	    F3.addBinary( valToAdd );
-	}
-	outit3 = System.currentTimeMillis();
-
-	OrderedArrayList F4 = new OrderedArrayList();
-	long init4;
-	long outit4;
-	init4 = System.currentTimeMillis();
-	// testing linear search
-	for( int m = 0; m < s; m++ ) {
-	    int valToAdd = (int)( p * Math.random() );
-	    //System.out.println( valToAdd );
-	    F4.addBinary( valToAdd );
-	}
-	outit4 = System.currentTimeMillis();
-*/
-	//addlin
-	//1 mil
-
-	//addbin
-	//1 mil, 5mil, 450575 millis
-	//1 mil, 500k, 445610 millis
-	//1 mil, 50k, 454353 millis
-	//1 mil, 5k, 449684 millis
-	//1 mil, 500, 440244 millis
-	//1 mil, 50, 438579 millis
-	//1 mil, 5, 430708 millis
-	//1 mil, 1, 417445 millis 
-	//100k, 5mil, 2167
-	//100k, 500k, 2242
-	//100k, 50k, 2166
-	//100k, 5k, 2139
-	//100k, 500, 2107
-	//100k, 50, 2083
-	//100k, 5, 2067
-	//100k, 1, 2050
-	//10k, 5mil, 52
-	//10k, 500k, 52
-	//10k, 50k, 52
-	//10k, 5k, 51
-	//10k, 500, 50
-	//10k, 50, 48
-	//10k, 5, 42
-	//10k, 1, 39
-	//1k, 5 mil, 22
-	//1k, 500k, 22
-	//1k, 50k, 22
-	//1k, 5k, 21
-	//1k, 500, 20
-	//1k, 50, 16
-	//1k, 5, 10
-	//1k, 1, 7
-	//100, 5 mil, 2
-	//100, 500k, 2
-	//100, 50k, 2
-	//100, 5k, 2
-	//100, 500, 2
-	//100, 50, 1
-	//100, 5, 1
-	//100, 1, 0 
-
+	
 	System.out.println("\nafter population via addLinear() calls:");
 	System.out.println( Franz );
 	System.out.println();
-	long a = (outit - init);
-	// long a1 = (outit1 - init1);
-	// long a2 = (outit2 - init2);
-	// long a3 = (outit3 - init3);
-	// long a4 = (outit4 - init4);
 
-
-	System.out.println(a);
-	// System.out.println(a1);
-	// System.out.println(a2);
-	// System.out.println(a3);
-	// System.out.println(a4);
-	// System.out.println((a + a1 + a2 + a3 + a4) / 5);
-	int li;
-	long in;
-	long out;
-	in = System.currentTimeMillis();
-	li = Franz.findLin(p);
-	out = System.currentTimeMillis();	
-	int li1;
-	long in1;
-	long out1;
-	in1 = System.currentTimeMillis();
-	li1 = Franz.findLin(p/2);
-	out1 = System.currentTimeMillis();	
-
-
-	long b = (out - in);
-	long b1 = (out1 - in1);
-	System.out.println(li);
-	System.out.println(b);
-	System.out.println(li1);
-	System.out.println(b1);
-	    
+	System.out.println(Franz.testLin(p));
+	System.out.println(Franz.testLin(p/2));
+	System.out.println(Franz.testbin(p, s - 1 ,0));
+	System.out.println(Franz.testbin(p/16, s - 1, 0));
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
