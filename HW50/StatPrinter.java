@@ -132,7 +132,7 @@ public class StatPrinter {
 	    }
 	}
 	System.out.println(histo);
-    }//O(n)
+    }//O(n^2)
 
     public String toString(){
 	String info = "";
@@ -140,7 +140,7 @@ public class StatPrinter {
 	    info += _frequency.get(i) + " ";
 	}
 	return info;
-    }
+    }//O(n)
 
     public static void main(String[] args){
 	ArrayList Wee = new ArrayList();
