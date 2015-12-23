@@ -52,9 +52,7 @@ public class SelectionSort {
 		    minIndex = j;
 		}
 	    }
-	    temp = data.get(minIndex);
-	    data.set(minIndex, data.get(i));
-	    data.set(i, temp); 
+	    data.set(minIndex, data.set(i, data.get(minIndex))); 
 	}          
     }//end selectionSort -- O(n^2)
 
@@ -72,9 +70,7 @@ public class SelectionSort {
 		    minIndex = j;
 		}
 	    }
-	    temp = data.get(minIndex);
-	    data.set(minIndex, data.get(i));
-	    data.set(i, temp); 
+	    data.set(minIndex, data.set(i, data.get(minIndex))); 
 	}          
 	return data;
       }//end selectionSort -- O(n^2)
